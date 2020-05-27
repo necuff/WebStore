@@ -38,14 +38,8 @@ namespace WebStore.Controllers
         };
         
 
-        public IActionResult Index()
-        {
-            ViewBag.Title = "Hello world";
-            //ViewData["Title"] = "Hello world";
-
-            //return Content("First controller action result");
-            return View(__Employees);
-        }
+        public IActionResult Index() => View();
+        
 
         public IActionResult EmployeeDetails(int id)
         {
