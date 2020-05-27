@@ -18,9 +18,14 @@ namespace WebStore
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+                //.ConfigureAppConfiguration(opt => opt.AddInFile("appsettings.ini"))     <- почему то не работает       
+                .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    config.AddIniFile("config.ini", optional: true, reloadOnChange: true);
+                })
+                .ConfigureWebHostDefaults(host =>
+                {
+                    host.UseStartup<Startup>();
                 });
     }
 }
