@@ -1,15 +1,22 @@
-﻿
-@{
-    Layout = null;
-}
+﻿<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <partial name="Partial/_LeftSideBar" />
+            </div>
+            <div class="col-sm-9">
+                <partial name="Partial/BlogSingle/_BlogPostArea" />
 
-<!DOCTYPE html>
+                <partial name="Partial/BlogSingle/_RatingArea" />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>BlogSingle</title>
-</head>
-<body>
-</body>
-</html>
+                <partial name="Partial/BlogSingle/_SocialsShare" />
+
+                <partial name="Partial/BlogSingle/_Comments" />
+
+                <partial name="Partial/BlogSingle/_ResponseArea" />
+
+                <partial name="Partial/BlogSingle/_ReplayBox" />
+            </div>
+        </div>
+    </div>
+</section>
