@@ -17,7 +17,13 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews(opt=>
+            { 
+                //«десь добавл€ютс€ фильтры и соглашени€ дл€ MVC
+                //opt.Filters.Add<>()
+                //opt.Conventions.Add()
+            })
+                .AddRazorRuntimeCompilation();
         }
      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
