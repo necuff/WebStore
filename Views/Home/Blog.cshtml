@@ -1,0 +1,22 @@
+﻿    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <partial name="Partial/_LeftSideBar" />
+                </div>
+                <div class="col-sm-9">
+                    <div class="blog-post-area">
+                        <h2 class="title text-center">Latest From our Blog</h2>
+
+                        @for (int i = 0; i < 3; i++)
+                        {
+                            <partial name="Partial/_SingleBlogPost" />
+                        }
+
+                        <partial name="Partial/_PaginationArea" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

@@ -8,58 +8,26 @@ using WebStore.Models;
 namespace WebStore.Controllers
 {    
     public class HomeController : Controller
-    {
-        private static readonly List<Employee> __Employees = new List<Employee>
-        {
-            new Employee
-            {
-                Id = 1,
-                Surname = "Иванов",
-                FirstName = "Иван",
-                Patronymic = "Иванович",
-                Age = 50
-            },
-            new Employee
-            {
-                Id = 2,
-                Surname = "Петров",
-                FirstName = "Петр",
-                Patronymic = "Петрович",
-                Age = 25
-            },
-            new Employee
-            {
-                Id = 3,
-                Surname = "Сидоров",
-                FirstName = "Сидор",
-                Patronymic = "Сидорович",
-                Age = 30
-            }
-        };
-        
+    {                
+        public IActionResult Index() => View();
 
-        public IActionResult Index()
-        {
-            ViewBag.Title = "Hello world";
-            //ViewData["Title"] = "Hello world";
+        public IActionResult Blog() => View();
 
-            //return Content("First controller action result");
-            return View(__Employees);
-        }
+        public IActionResult BlogSingle() => View();
 
-        public IActionResult EmployeeDetails(int id)
-        {
-            var employee = __Employees.FirstOrDefault(e => e.Id == id);
-            if (employee is null)
-                return NotFound();
+        public IActionResult Cart() => View();
 
-            return View(employee);
-        }
+        public IActionResult CheckOut() => View();
 
+        public IActionResult ContactUs() => View();
 
-        public IActionResult AnotherAction()
-        {
-            return Content("Another action result");
-        }
+        public IActionResult Login() => View();
+
+        public IActionResult ProductDetails() => View();
+
+        public IActionResult Shop() => View();
+
+        public IActionResult Error404() => View();
+
     }
 }
