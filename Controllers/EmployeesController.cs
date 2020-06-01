@@ -7,6 +7,9 @@ using WebStore.Models;
 
 namespace WebStore.Controllers
 {
+    //[Route("{controller}")]   //Так выглядит маршрут по умолчанию
+    //Ниже вариант ручного прописывания маршрутов
+    //[Route("Staff")]
     public class EmployeesController : Controller
     {
         private static readonly List<Employee> __Employees = new List<Employee>
@@ -37,11 +40,13 @@ namespace WebStore.Controllers
             }
         };
 
+        //[Route("List")]
         public IActionResult Index()
         {
             return View(__Employees);
         }
 
+        //[Route("{id}")]
         public IActionResult EmployeeDetails(int id)
         {
             var employee = __Employees.FirstOrDefault(e => e.Id == id);

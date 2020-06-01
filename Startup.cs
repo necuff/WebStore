@@ -48,11 +48,12 @@ namespace WebStore
             app.UseWelcomePage("/MVC");
 
             //Вызвать свое промежуточное ПО
-            app.Use(async (context, next) => 
-            {
-                Debug.WriteLine($"Request to {context.Request.Path}");
-                await next(); //Если не вызвать next() конвейер прервется
-            });
+            
+            //app.Use(async (context, next) => 
+            //{
+            //    Debug.WriteLine($"Request to {context.Request.Path}");
+            //    await next(); //Если не вызвать next() конвейер прервется
+            //}); 
 
             //app.UseMiddleware<>();
 
