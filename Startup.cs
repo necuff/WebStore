@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
+using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Services;
 
 namespace WebStore
 {
@@ -25,6 +27,8 @@ namespace WebStore
                 //opt.Conventions.Add()
             })
                 .AddRazorRuntimeCompilation();
+
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
         }
      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
