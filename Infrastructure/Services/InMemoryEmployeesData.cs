@@ -45,7 +45,7 @@ namespace WebStore.Infrastructure.Services
                 return;
 
             var db_item = GetById(Employee.Id);
-            db_item.Surname = Employee.FirstName;
+            db_item.Surname = Employee.Surname;
             db_item.FirstName = Employee.FirstName;
             db_item.Patronymic = Employee.Patronymic;
             db_item.Age = Employee.Age;
