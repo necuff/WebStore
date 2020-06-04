@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+п»їusing Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -22,46 +22,48 @@ namespace WebStore
         {
             services.AddControllersWithViews(opt=>
             { 
-                //Здесь добавляются фильтры и соглашения для MVC
+                //Р—РґРµСЃСЊ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ С„РёР»СЊС‚СЂС‹ Рё СЃРѕРіР»Р°С€РµРЅРёСЏ РґР»СЏ MVC
                 //opt.Filters.Add<>()
                 //opt.Conventions.Add()
             })
                 .AddRazorRuntimeCompilation();
 
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();     //РћР±СЉРµРєС‚ СЃРѕР·РґР°РµС‚СЃСЏ РЅР° РІСЃРµ РІСЂРµРјСЏ СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ
+            //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();   //РљР°Р¶РґС‹Р№ СЂР°Р· РїСЂРё РІС‹Р·РѕРІРµ СЃРѕР·РґР°РµС‚СЃСЏ РЅРѕРІС‹Р№ РѕР±СЉРµРєС‚
+            //services.AddScoped<IEmployeesData, InMemoryEmployeesData>();      //РћРґРёРЅ РѕР±СЉРµРєС‚ РЅР° РѕРґРЅСѓ РѕР±Р»Р°СЃС‚СЊ РґРµР№СЃС‚РІРёСЏ
         }
      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //Здесь подключается все промежуточное ПО
+            //Р—РґРµСЃСЊ РїРѕРґРєР»СЋС‡Р°РµС‚СЃСЏ РІСЃРµ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅРѕРµ РџРћ
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();    //Отвечает за отображение страницы с эксепшенами. Если отсутствует, то просто возвращается код ошибки 500
+                app.UseDeveloperExceptionPage();    //РћС‚РІРµС‡Р°РµС‚ Р·Р° РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹ СЃ СЌРєСЃРµРїС€РµРЅР°РјРё. Р•СЃР»Рё РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚, С‚Рѕ РїСЂРѕСЃС‚Рѕ РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ РєРѕРґ РѕС€РёР±РєРё 500
 
                 app.UseBrowserLink();
             }
 
-            //это промежуточное ПО отвечает за возврат статического содержимого
+            //СЌС‚Рѕ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅРѕРµ РџРћ РѕС‚РІРµС‡Р°РµС‚ Р·Р° РІРѕР·РІСЂР°С‚ СЃС‚Р°С‚РёС‡РµСЃРєРѕРіРѕ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ
             app.UseStaticFiles();
             app.UseDefaultFiles();
 
-            //Это маршрутизация
+            //Р­С‚Рѕ РјР°СЂС€СЂСѓС‚РёР·Р°С†РёСЏ
             app.UseRouting();
 
-            //показывает рекламную страницу MVC
+            //РїРѕРєР°Р·С‹РІР°РµС‚ СЂРµРєР»Р°РјРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ MVC
             app.UseWelcomePage("/MVC");
 
-            //Вызвать свое промежуточное ПО
+            //Р’С‹Р·РІР°С‚СЊ СЃРІРѕРµ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅРѕРµ РџРћ
             
             //app.Use(async (context, next) => 
             //{
             //    Debug.WriteLine($"Request to {context.Request.Path}");
-            //    await next(); //Если не вызвать next() конвейер прервется
+            //    await next(); //Р•СЃР»Рё РЅРµ РІС‹Р·РІР°С‚СЊ next() РєРѕРЅРІРµР№РµСЂ РїСЂРµСЂРІРµС‚СЃСЏ
             //}); 
 
             //app.UseMiddleware<>();
 
-            //Маппинг
+            //РњР°РїРїРёРЅРі
             app.UseEndpoints(endpoints =>
             {                
 
@@ -69,8 +71,8 @@ namespace WebStore
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                     /*
-                     * id? - '?' - опчиональный параметр
-                     * action=Index - значение по умолчанию
+                     * id? - '?' - РѕРїС‡РёРѕРЅР°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ
+                     * action=Index - Р·РЅР°С‡РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
                      */
                     );
             });
