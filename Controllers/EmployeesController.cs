@@ -68,9 +68,17 @@ namespace WebStore.Controllers
         {
             if (model is null)
                 throw new ArgumentNullException(nameof(model));
-
+            
+            //Проверка мадели на валидность
             if (!ModelState.IsValid)
                 return View(model);
+
+            //Ручная проверка значений на валидность
+            if (model.Age < 18 || model.Age > 75)
+                ModelState.AddModelError("Age", "Сотрудник не проходит по возрасту");
+            if (model.FirstName == "123" && model.Surname == "QWE")
+                ModelState.AddModelError(string.Empty, "Странное сочетание имени и фамилии");
+
 
             var id = model.Id;
             
