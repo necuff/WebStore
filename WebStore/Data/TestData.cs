@@ -386,6 +386,6 @@ namespace WebStore.Data
                     BrandId = 3
                 },
 
-        }
+        };
     }
 }
