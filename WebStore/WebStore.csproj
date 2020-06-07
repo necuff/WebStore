@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="WebStore.Domain\**" />
+    <Compile Remove="_ReSharper.Caches\**" />
     <Content Remove="WebStore.Domain\**" />
+    <Content Remove="_ReSharper.Caches\**" />
     <EmbeddedResource Remove="WebStore.Domain\**" />
+    <EmbeddedResource Remove="_ReSharper.Caches\**" />
     <None Remove="WebStore.Domain\**" />
+    <None Remove="_ReSharper.Caches\**" />
   </ItemGroup>
 
   <ItemGroup>
