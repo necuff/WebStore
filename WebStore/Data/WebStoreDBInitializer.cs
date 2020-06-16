@@ -22,8 +22,24 @@ namespace WebStore.Data
                 if (!db.EnsureCreated())    создание БД
                     throw new InvalidOperationException("Ошибка при создании базы данных товаров");
             */
-
             db.Migrate();   //аналог update-database
+
+
+            if (!_db.Employees.Any())
+                using (db.BeginTransaction())
+                {
+                    var employees = TestData.Employees.ToList();
+                    /*
+                    foreach (var employee in employees)
+                        employee.Id = 0;
+                    */
+
+                    employees.ForEach(e => e.Id = 0); 
+
+                    _db.Employees.AddRange(employees);
+                }
+
+                    
 
             if (_db.Products.Any()) return;
 

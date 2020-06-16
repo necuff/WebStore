@@ -36,7 +36,8 @@ namespace WebStore
             })
                 .AddRazorRuntimeCompilation();
 
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();     //Объект создается на все время существования приложения
+            services.AddScoped<IEmployeesData, SqlEmployeesData>();
+            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();     //Объект создается на все время существования приложения
             //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();   //Каждый раз при вызове создается новый объект
             //services.AddScoped<IEmployeesData, InMemoryEmployeesData>();      //Один объект на одну область действия
 
