@@ -1,20 +1,26 @@
-﻿<partial name="Partial/_Slider" />
+﻿@using WebStore.Infrastructure.Interfaces
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IProductData ProductData
 
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <partial name="Partial/_LeftSideBar" />
-            </div>
+<!-- Сервис локализации -->
+@*@inject IViewLocalizer Loc-->*@
 
-            <div class="col-sm-9 padding-right">
-                @*<partial name="Partial/_FeaturesItems" />*@
+<partial name="Partial/_Slider" />
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <partial name="Partial/_LeftSideBar" />
+                </div>
 
-                <partial name="Partial/_CategoryTab" />
+                <div class="col-sm-9 padding-right">
+                    <partial name="Partial/_FeaturesItems" model="ProductData.GetProducts().Take(6).Select(p => new ProductViewModel { Id = p.Id, Name = p.Name, Price = p.Price, Order = p.Order, ImageUrl = p.ImageUrl }).OrderBy(p=>p.Order)" />
 
-                <partial name="Partial/_RecommendedItems" />
+                    <partial name="Partial/_CategoryTab" />
 
+                    <partial name="Partial/_RecommendedItems" />
+
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>

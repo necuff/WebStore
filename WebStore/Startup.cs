@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
+using WebStore.DAL.Context;
+using WebStore.Data;
 using WebStore.Infrastructure.Interfaces;
-using WebStore.Infrastructure.Services;
+using WebStore.Infrastructure.Services.InMemory;
+using WebStore.Infrastructure.Services.InSQL;
 
 namespace WebStore
 {
@@ -20,6 +24,10 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<WebStoreDB>(opt=>opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<WebStoreDBInitializer>();
+
             services.AddControllersWithViews(opt=>
             { 
                 //Здесь добавляются фильтры и соглашения для MVC
@@ -32,11 +40,14 @@ namespace WebStore
             //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();   //Каждый раз при вызове создается новый объект
             //services.AddScoped<IEmployeesData, InMemoryEmployeesData>();      //Один объект на одну область действия
 
-            services.AddSingleton<IProductData, InMemoryProductData>();
+            //services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
         }
      
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDBInitializer db)
         {
+            db.Initialize();
+
             //Здесь подключается все промежуточное ПО
             if (env.IsDevelopment())
             {

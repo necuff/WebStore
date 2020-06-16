@@ -6,24 +6,24 @@ using WebStore.Data;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
 
-namespace WebStore.Infrastructure.Services
+namespace WebStore.Infrastructure.Services.InMemory
 {
     public class InMemoryEmployeesData : IEmployeesData
     {
 
-        private readonly List<Employee> _Employees = TestData.Employees; 
+        private readonly List<Employee> _Employees = TestData.Employees;
 
         public int Add(Employee Employee)
         {
             if (Employee is null)
                 throw new ArgumentNullException(nameof(Employee));
 
-            if (_Employees.Contains(Employee)) 
+            if (_Employees.Contains(Employee))
                 return Employee.Id;
 
             Employee.Id = _Employees.Count == 0 ? 1 : _Employees.Max(e => e.Id) + 1;
             _Employees.Add(Employee);
-            
+
             return Employee.Id;
         }
 

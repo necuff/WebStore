@@ -7,7 +7,7 @@ using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Base;
 using WebStore.Infrastructure.Interfaces;
 
-namespace WebStore.Infrastructure.Services
+namespace WebStore.Infrastructure.Services.InMemory
 {
     public class InMemoryProductData : IProductData
     {
@@ -21,7 +21,7 @@ namespace WebStore.Infrastructure.Services
                 query = query.Where(product => product.SectionId == Filter.SectionId);
             if (Filter?.BrandId != null)
                 query = query.Where(product => product.BrandId == Filter.BrandId);
-           
+
             return query;
         }
 
