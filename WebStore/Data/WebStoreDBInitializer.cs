@@ -37,8 +37,7 @@ namespace WebStore.Data
                     employees.ForEach(e => e.Id = 0); 
 
                     _db.Employees.AddRange(employees);
-                }
-
+                }            
                     
 
             if (_db.Products.Any()) return;
