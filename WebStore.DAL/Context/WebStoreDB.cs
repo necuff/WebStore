@@ -1,14 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Base;
 using WebStore.Domain.Entities.Employees;
+using WebStore.Domain.Entities.Identity;
 
 namespace WebStore.DAL.Context
 {
-    public class WebStoreDB : DbContext
+    public class WebStoreDB : IdentityDbContext<User, Role, string>
     {
         public DbSet<Product> Products { get; set; }
 
