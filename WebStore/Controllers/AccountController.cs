@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Cli.Utils.CommandParsing;
 using System.Threading.Tasks;
 using WebStore.Domain.Entities.Identity;
 using WebStore.ViewMoodel.Identity;
@@ -56,7 +57,23 @@ namespace WebStore.Controllers
         {
             if (ModelState.IsValid) return View(Model);
 
-            return RedirectToAction("Index", "Home");
+            var login_result = await _SignInManager.PasswordSignInAsync(
+                Model.UserName,
+                Model.Password,
+                Model.RememberMe,
+                true
+                );
+
+            if(login_result.Succeeded)
+            {
+                if (Url.IsLocalUrl(Model.ReturnUrl))
+                    return Redirect(Model.ReturnUrl);
+                
+                return RedirectToAction("Index", "Home");
+            }
+            ModelState.AddModelError(string.Empty, "Неверное имя пользователя или пароль");
+
+            return View(Model);
 
         }
 
