@@ -97,6 +97,8 @@ namespace WebStore
             //Это маршрутизация
             app.UseRouting();
 
+            app.UseAuthentication();
+
             //показывает рекламную страницу MVC
             app.UseWelcomePage("/MVC");
 

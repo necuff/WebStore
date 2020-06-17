@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
 using WebStore.Domain.Entities.Employees;
@@ -13,6 +14,7 @@ namespace WebStore.Controllers
     //[Route("{controller}")]   //Так выглядит маршрут по умолчанию
     //Ниже вариант ручного прописывания маршрутов
     //[Route("Staff")]
+    //[Authorize]
     public class EmployeesController : Controller
     {
         //private static readonly List<Employee> __Employees = TestData.Employees;
@@ -31,6 +33,7 @@ namespace WebStore.Controllers
         }
 
         //[Route("{id}")]
+        //[Authorize]
         public IActionResult EmployeeDetails(int id)
         {
             var employee = _EmployeesData.GetById(id);

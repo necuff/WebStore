@@ -32,7 +32,7 @@ namespace WebStore.Controllers
                 UserName = Model.UserName
             };
 
-            var registration_result = await _UserManager.CreateAsync(user);
+            var registration_result = await _UserManager.CreateAsync(user, Model.Password);
             if (registration_result.Succeeded)
             {
                 await _SignInManager.SignInAsync(user, false);
