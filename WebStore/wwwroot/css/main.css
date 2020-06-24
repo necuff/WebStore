@@ -262,7 +262,7 @@ a#scrollUp i{
   outline: medium none;
   padding-left: 10px;
   width: 155px;
-  background-image: url(../images/home/searchicon.png);
+  background-image: url("..\images\home\searchicon.png");
   background-repeat: no-repeat;
   background-position: 130px;
 }
@@ -898,7 +898,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
+  opacity: 0.6;
 }
 
 .single-products:hover .product-overlay {
