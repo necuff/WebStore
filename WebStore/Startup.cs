@@ -56,7 +56,7 @@ namespace WebStore
 
                 opt.LoginPath = "/Account/Login";
                 opt.LogoutPath = "/Account/Logout";
-                opt.AccessDeniedPath = "/Account?accessDenied";
+                opt.AccessDeniedPath = "/Account/AccessDenied";
 
                 opt.SlidingExpiration = true;
             });
