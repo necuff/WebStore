@@ -32,8 +32,7 @@ namespace WebStore.Controllers
                 SectionId = SectionId,
                 BrandId = BrandId,
                 //Products = products.Select(p=>p.ToView()).OrderBy(p => p.Order)
-                Products = products
-                    .Select(ProductMapper.ToView)
+                Products = products.ToView()
                     .OrderBy(p=>p.Order)
             });
         }

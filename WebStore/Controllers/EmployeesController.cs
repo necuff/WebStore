@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
 using WebStore.Domain.Entities.Employees;
 using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Mapping;
 using WebStore.ViewMoodel;
 
 namespace WebStore.Controllers
@@ -56,14 +57,7 @@ namespace WebStore.Controllers
 
 
 
-            return View(new EmployeeViewModel()
-            {
-                Id = employee.Id,
-                FirstName = employee.FirstName,
-                Surname = employee.Surname,
-                Patronymic = employee.Patronymic,
-                Age = employee.Age
-            });
+            return View(employee.ToView());
         }
 
         [HttpPost]
@@ -84,15 +78,8 @@ namespace WebStore.Controllers
 
 
             var id = model.Id;
-            
-            var employee = new Employee
-            {
-                Id = model.Id,
-                FirstName = model.FirstName,
-                Surname = model.Surname,
-                Patronymic = model.Patronymic,
-                Age = model.Age
-            };
+
+            var employee = model.FromView();
 
             if(id == 0)
             {
@@ -117,14 +104,7 @@ namespace WebStore.Controllers
             if (employee is null)
                 return NotFound();
 
-            return View(new EmployeeViewModel
-            {
-                Id = employee.Id,
-                FirstName = employee.FirstName,
-                Surname = employee.Surname,
-                Patronymic = employee.Patronymic,
-                Age = employee.Age
-            });
+            return View(employee.ToView());
         }
 
         [HttpPost]
