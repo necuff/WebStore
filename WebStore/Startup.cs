@@ -93,14 +93,14 @@ namespace WebStore
             //это промежуточное ПО отвечает за возврат статического содержимого
             app.UseStaticFiles();
             app.UseDefaultFiles();
+            app.UseWelcomePage("/MVC");
 
             //Это маршрутизация
             app.UseRouting();
 
             app.UseAuthentication();
-
-            //показывает рекламную страницу MVC
-            app.UseWelcomePage("/MVC");
+            app.UseAuthorization();
+                        
 
             //Вызвать свое промежуточное ПО
             
