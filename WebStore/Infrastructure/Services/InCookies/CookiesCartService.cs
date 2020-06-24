@@ -113,8 +113,8 @@ namespace WebStore.Infrastructure.Services.InCookies
 
             return new CartViewModel
             {
-                Items = Cart.Items.Select(item=>(product_view_models[item.ProductId], item.Quantity))
-            }
+                Items = Cart.Items.Select(item => (product_view_models[item.ProductId], item.Quantity))
+            };
         }
     }
 }

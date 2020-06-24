@@ -30,7 +30,7 @@ namespace WebStore.Infrastructure.Services.InSQL
         {
             IQueryable<Product> query = _db.Products;
 
-            if (Filter?.Ids.Length > 0)
+            if (Filter?.Ids?.Length > 0)
                 query = query.Where(Product => Filter.Ids.Contains(Product.Id));
             else
             {
