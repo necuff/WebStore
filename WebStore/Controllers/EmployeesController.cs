@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
 using WebStore.Domain.Entities.Employees;
+using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Mapping;
 using WebStore.ViewMoodel;
 
 namespace WebStore.Controllers
@@ -14,7 +16,7 @@ namespace WebStore.Controllers
     //[Route("{controller}")]   //Так выглядит маршрут по умолчанию
     //Ниже вариант ручного прописывания маршрутов
     //[Route("Staff")]
-    //[Authorize]
+    [Authorize]
     public class EmployeesController : Controller
     {
         //private static readonly List<Employee> __Employees = TestData.Employees;
@@ -44,6 +46,7 @@ namespace WebStore.Controllers
         }
 
         #region Редактирование
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(int? id)
         {
             if (id is null) return View(new EmployeeViewModel());
@@ -56,17 +59,11 @@ namespace WebStore.Controllers
 
 
 
-            return View(new EmployeeViewModel()
-            {
-                Id = employee.Id,
-                FirstName = employee.FirstName,
-                Surname = employee.Surname,
-                Patronymic = employee.Patronymic,
-                Age = employee.Age
-            });
+            return View(employee.ToView());
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(EmployeeViewModel model)
         {
             if (model is null)
@@ -84,15 +81,8 @@ namespace WebStore.Controllers
 
 
             var id = model.Id;
-            
-            var employee = new Employee
-            {
-                Id = model.Id,
-                FirstName = model.FirstName,
-                Surname = model.Surname,
-                Patronymic = model.Patronymic,
-                Age = model.Age
-            };
+
+            var employee = model.FromView();
 
             if(id == 0)
             {
@@ -108,6 +98,7 @@ namespace WebStore.Controllers
         #endregion
 
         #region Удаление
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete(int id)
         {
             if (id <= 0)
@@ -117,17 +108,11 @@ namespace WebStore.Controllers
             if (employee is null)
                 return NotFound();
 
-            return View(new EmployeeViewModel
-            {
-                Id = employee.Id,
-                FirstName = employee.FirstName,
-                Surname = employee.Surname,
-                Patronymic = employee.Patronymic,
-                Age = employee.Age
-            });
+            return View(employee.ToView());
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult DeleteConfirmed(int id)
         {
             _EmployeesData.Delete(id);

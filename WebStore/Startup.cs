@@ -10,6 +10,7 @@ using WebStore.DAL.Context;
 using WebStore.Data;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Services.InCookies;
 using WebStore.Infrastructure.Services.InSQL;
 
 namespace WebStore
@@ -56,7 +57,7 @@ namespace WebStore
 
                 opt.LoginPath = "/Account/Login";
                 opt.LogoutPath = "/Account/Logout";
-                opt.AccessDeniedPath = "/Account?accessDenied";
+                opt.AccessDeniedPath = "/Account/AccessDenied";
 
                 opt.SlidingExpiration = true;
             });
@@ -76,6 +77,8 @@ namespace WebStore
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<ICartService, CookiesCartService>();
+
         }
      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDBInitializer db)
@@ -93,14 +96,14 @@ namespace WebStore
             //это промежуточное ПО отвечает за возврат статического содержимого
             app.UseStaticFiles();
             app.UseDefaultFiles();
+            app.UseWelcomePage("/MVC");
 
             //Это маршрутизация
             app.UseRouting();
 
             app.UseAuthentication();
-
-            //показывает рекламную страницу MVC
-            app.UseWelcomePage("/MVC");
+            app.UseAuthorization();
+                        
 
             //Вызвать свое промежуточное ПО
             

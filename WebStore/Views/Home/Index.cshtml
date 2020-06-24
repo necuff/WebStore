@@ -1,5 +1,7 @@
 ﻿@using WebStore.Infrastructure.Interfaces
 @using Microsoft.AspNetCore.Mvc.Localization
+@using WebStore.Infrastructure.Mapping
+
 @inject IProductData ProductData
 
 <!-- Сервис локализации -->
@@ -14,7 +16,7 @@
                 </div>
 
                 <div class="col-sm-9 padding-right">
-                    <partial name="Partial/_FeaturesItems" model="ProductData.GetProducts().Take(6).Select(p => new ProductViewModel { Id = p.Id, Name = p.Name, Price = p.Price, Order = p.Order, ImageUrl = p.ImageUrl }).OrderBy(p=>p.Order)" />
+                    <partial name="Partial/_FeaturesItems" model="ProductData.GetProducts().Take(6).ToView().OrderBy(p=>p.Order)" />
 
                     <partial name="Partial/_CategoryTab" />
 

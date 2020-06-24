@@ -35,6 +35,9 @@ namespace WebStore.Controllers
             var registration_result = await _UserManager.CreateAsync(user, Model.Password);
             if (registration_result.Succeeded)
             {
+                await _UserManager.AddToRoleAsync(user, Role.User);
+
+
                 await _SignInManager.SignInAsync(user, false);
                 return RedirectToAction("Index", "Home");
             }
@@ -55,7 +58,7 @@ namespace WebStore.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel Model)
         {
-            if (ModelState.IsValid) return View(Model);
+            if (!ModelState.IsValid) return View(Model);
 
             var login_result = await _SignInManager.PasswordSignInAsync(
                 Model.UserName,
