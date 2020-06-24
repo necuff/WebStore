@@ -1,14 +1,15 @@
-﻿@model IEnumerable<WebStore.Domain.Entities.Employees.Employee> 
+﻿@model IEnumerable<WebStore.Domain.Entities.Employees.Employee>
+@using WebStore.Domain.Entities.Identity
 
-@{ 
+@{
     ViewData["Title"] = "Index";
 }
 
 <div class="container">
 
     <a asp-action="Edit" class="btn btn-success">Создать</a>
-     
-    <hr/>
+
+    <hr />
     <table class="table">
         <thead>
             <tr>
@@ -18,11 +19,15 @@
                 <th>Имя</th>
                 <th>Отчество</th>
                 <th>Возраст</th>
-                <th></th>
+                @if (User.IsInRole(Role.Administrator))
+                {
+                    <th></th>
+                }
+
             </tr>
         </thead>
         <tbody>
-            @foreach(var employee in Model)
+            @foreach (var employee in Model)
             {
             <tr>
                 <td>
@@ -36,14 +41,17 @@
                 <td>@employee.Patronymic</td>
                 <td>@employee.Age</td>
                 @*<td><a href="@Url.Action("EmpoloyeeDetails","Employees")">Информация</a></td>*@
-            <td> 
-                <a asp-controller="Employees" asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-success">
-                    <i class="fa fa-edit"></i>
-                </a>
-                <a asp-controller="Employees" asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger">
-                    <i class="fa fa-trash-o"></i>
-                </a>
-            </td>
+                @if (User.IsInRole(Role.Administrator))
+                {
+                    <td>
+                        <a asp-controller="Employees" asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-success">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a asp-controller="Employees" asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    </td>
+                }
             </tr>
             }
         </tbody>
