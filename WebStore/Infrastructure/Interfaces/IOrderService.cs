@@ -7,7 +7,7 @@ using WebStore.ViewMoodel;
 
 namespace WebStore.Infrastructure.Interfaces
 {
-    interface IOrderService
+    public interface IOrderService
     {
         Task<Order> CreateOrder(string UserName, CartViewModel Cart, OrderViewModel OrderModel);
 
