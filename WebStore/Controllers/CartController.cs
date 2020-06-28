@@ -48,7 +48,7 @@ namespace WebStore.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckOut(OrderViewModel Model, [FromServices] IOrderService OrderService)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View(nameof(Details), new CartOrderViewModel
                 {
                     Cart = cartService.TransformFromCart(),
