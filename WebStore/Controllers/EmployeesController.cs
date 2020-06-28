@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
@@ -47,7 +48,7 @@ namespace WebStore.Controllers
 
         #region Редактирование
         [Authorize(Roles = Role.Administrator)]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int? id, [FromServices] IMapper mapper)
         {
             if (id is null) return View(new EmployeeViewModel());
             if (id < 0)
@@ -58,13 +59,13 @@ namespace WebStore.Controllers
                 return NotFound();
 
 
-
-            return View(employee.ToView());
+            return View(mapper.Map<EmployeeViewModel>(employee));
+            //return View(employee.ToView());
         }
 
         [HttpPost]
         [Authorize(Roles = Role.Administrator)]
-        public IActionResult Edit(EmployeeViewModel model)
+        public IActionResult Edit(EmployeeViewModel model, [FromServices] IMapper mapper)
         {
             if (model is null)
                 throw new ArgumentNullException(nameof(model));
@@ -82,9 +83,10 @@ namespace WebStore.Controllers
 
             var id = model.Id;
 
-            var employee = model.FromView();
+            var employee = mapper.Map<Employee>(model);
+            //var employee = model.FromView();
 
-            if(id == 0)
+            if (id == 0)
             {
                 _EmployeesData.Add(employee);
             } else

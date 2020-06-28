@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entities;
 using WebStore.Infrastructure.Interfaces;
@@ -12,12 +13,14 @@ namespace WebStore.Controllers
 {
     public class CatalogController : Controller
     {
-        private readonly IProductData _ProductData;
+        private readonly IProductData _ProductData;        
 
-        public CatalogController(IProductData ProductData) => _ProductData = ProductData;
-        
+        public CatalogController(IProductData ProductData)
+        {
+            _ProductData = ProductData;            
+        }
 
-        public IActionResult Shop(int? SectionId, int? BrandId)
+        public IActionResult Shop(int? SectionId, int? BrandId, [FromServices]IMapper mapper)
         {
             var filter = new ProductFilter
             {
@@ -32,7 +35,10 @@ namespace WebStore.Controllers
                 SectionId = SectionId,
                 BrandId = BrandId,
                 //Products = products.Select(p=>p.ToView()).OrderBy(p => p.Order)
-                Products = products.ToView()
+                Products = products
+                    .Select(mapper.Map<ProductViewModel>)
+                    //.Select(p=> mapper.Map<ProductViewModel>(p))
+                    //.ToView()
                     .OrderBy(p=>p.Order)
             });
         }
