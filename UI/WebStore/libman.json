@@ -2,6 +2,7 @@
   "version": "1.0",
   "defaultProvider": "cdnjs",
   "libraries": [
+/*
     {
       "library": "jquery@1.10.2",
       "destination": "wwwroot/lib/jquery/"
@@ -34,5 +35,6 @@
       "library": "prettyPhoto@3.1.6",
       "destination": "wwwroot/lib/prettyPhoto/"
     }
+  */
   ]
 }
