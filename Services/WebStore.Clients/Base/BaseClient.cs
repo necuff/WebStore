@@ -9,8 +9,8 @@ namespace WebStore.Clients.Base
 {
     public abstract class BaseClient
     {
-        private readonly HttpClient _Client;
-        private readonly string _ServiceAddress;
+        protected readonly HttpClient _Client;
+        protected readonly string _ServiceAddress;
 
         public BaseClient(IConfiguration Configuration, string ServiceAddress)
         {
