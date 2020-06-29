@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebStore.Domain.Entities;
 using WebStore.Domain.ViewMoodel;
 
-namespace WebStore.Infrastructure.Mapping
+namespace WebStore.Services.Mapping
 {
     public static class ProductMapper
     {

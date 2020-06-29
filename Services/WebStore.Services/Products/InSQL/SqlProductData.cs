@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Base;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 
-namespace WebStore.Infrastructure.Services.InSQL
+namespace WebStore.Services.Products.InSQL
 {
     public class SqlProductData : IProductData
     {
@@ -40,13 +40,13 @@ namespace WebStore.Infrastructure.Services.InSQL
                 if (Filter?.SectionId != null)
                     query = query.Where(q => q.SectionId == Filter.SectionId);
             }
-            
 
-            
+
+
 
             return query;
         }
 
-        public IEnumerable<Section> GetSections() => _db.Sections;        
+        public IEnumerable<Section> GetSections() => _db.Sections;
     }
 }

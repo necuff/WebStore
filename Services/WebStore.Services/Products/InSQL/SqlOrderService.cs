@@ -8,9 +8,9 @@ using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.Entities.Orders;
 using WebStore.Domain.ViewMoodel;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 
-namespace WebStore.Infrastructure.Services.InSQL
+namespace WebStore.Services.Products.InSQL
 {
     public class SqlOrderService : IOrderService
     {
@@ -19,7 +19,7 @@ namespace WebStore.Infrastructure.Services.InSQL
 
         public SqlOrderService(WebStoreDB db, UserManager<User> UserManager)
         {
-            this._db = db;
+            _db = db;
             _userManager = UserManager;
         }
 
@@ -40,10 +40,10 @@ namespace WebStore.Infrastructure.Services.InSQL
                 Items = new List<OrderItem>()
             };
 
-            foreach(var (product_model, quantity) in Cart.Items)
+            foreach (var (product_model, quantity) in Cart.Items)
             {
                 var product = await _db.Products.FindAsync(product_model.Id);
-                if(product is null) throw new InvalidOperationException($"Товар id:{product_model.Id} не найден в БД");
+                if (product is null) throw new InvalidOperationException($"Товар id:{product_model.Id} не найден в БД");
 
                 var order_item = new OrderItem
                 {
@@ -71,6 +71,6 @@ namespace WebStore.Infrastructure.Services.InSQL
             .Include(order => order.Items)
             .Where(order => order.User.UserName == UserName)
             .ToArrayAsync();
-        
+
     }
 }

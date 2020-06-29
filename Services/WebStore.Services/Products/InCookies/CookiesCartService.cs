@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Models;
 using WebStore.Domain.ViewMoodel;
-using WebStore.Infrastructure.Interfaces;
-using WebStore.Infrastructure.Mapping;
+using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 
-namespace WebStore.Infrastructure.Services.InCookies
+namespace WebStore.Services.Products.InCookies
 {
     public class CookiesCartService : ICartService
     {
@@ -49,8 +49,8 @@ namespace WebStore.Infrastructure.Services.InCookies
 
         public CookiesCartService(IProductData productData, IHttpContextAccessor httpContextAccessor)
         {
-            this._productData = productData;
-            this._httpContextAccessor = httpContextAccessor;
+            _productData = productData;
+            _httpContextAccessor = httpContextAccessor;
 
             var user = _httpContextAccessor.HttpContext.User;
             var user_name = user.Identity.IsAuthenticated ? user.Identity.Name : null;
@@ -98,7 +98,7 @@ namespace WebStore.Infrastructure.Services.InCookies
 
             if (item is null) return;
             cart.Items.Remove(item);
-            
+
             Cart = cart;
         }
 
@@ -107,7 +107,7 @@ namespace WebStore.Infrastructure.Services.InCookies
             var products = _productData.GetProducts(new ProductFilter
             {
                 Ids = Cart.Items.Select(item => item.ProductId).ToArray()
-            }) ;
+            });
 
             var product_view_models = products.ToView().ToDictionary(p => p.Id);
 

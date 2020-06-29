@@ -6,7 +6,7 @@ using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Base;
 using Product = WebStore.Domain.Entities.Product;
 
-namespace WebStore.Infrastructure.Interfaces
+namespace WebStore.Interfaces.Services
 {
     public interface IProductData
     {

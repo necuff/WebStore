@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Data
+namespace WebStore.Services.Data
 {
     public class WebStoreDBInitializer
     {
@@ -15,11 +15,11 @@ namespace WebStore.Data
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
 
-        public WebStoreDBInitializer(WebStoreDB db, UserManager<User> userManager, RoleManager<Role> roleManager) 
-        { 
+        public WebStoreDBInitializer(WebStoreDB db, UserManager<User> userManager, RoleManager<Role> roleManager)
+        {
             _db = db;
-            this._userManager = userManager;
-            this._roleManager = roleManager;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public void Initialize()
@@ -46,7 +46,7 @@ namespace WebStore.Data
             var db = _db.Database;
 
             if (!_db.Employees.Any()) return;
-            
+
             using (db.BeginTransaction())
             {
                 var employees = TestData.Employees.ToList();
@@ -59,8 +59,8 @@ namespace WebStore.Data
 
                 _db.Employees.AddRange(employees);
             }
-            
-                
+
+
         }
 
         private void InitializeProducts()
@@ -113,7 +113,7 @@ namespace WebStore.Data
             if (!await _roleManager.RoleExistsAsync(Role.User))
                 await _roleManager.CreateAsync(new Role { Name = Role.User });
 
-            if(await _userManager.FindByNameAsync(User.Administrator) is null)
+            if (await _userManager.FindByNameAsync(User.Administrator) is null)
             {
                 var admin = new User { UserName = User.Administrator };
 

@@ -5,22 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Employees;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 
-namespace WebStore.Infrastructure.Services.InSQL
+namespace WebStore.Services.Products.InSQL
 {
     public class SqlEmployeesData : IEmployeesData
     {
         private readonly WebStoreDB _db;
 
-        public SqlEmployeesData(WebStoreDB db) => _db = db; 
+        public SqlEmployeesData(WebStoreDB db) => _db = db;
 
         public int Add(Employee Employee)
         {
-            if (Employee is null) 
+            if (Employee is null)
                 throw new ArgumentNullException(nameof(Employee));
 
-            if (Employee.Id != 0) 
+            if (Employee.Id != 0)
                 throw new InvalidOperationException("Для добавляемого сотрудника вручную задан первичный ключ");
 
             _db.Employees.Add(Employee);
@@ -43,7 +43,7 @@ namespace WebStore.Infrastructure.Services.InSQL
 
         public void Edit(Employee Employee)
         {
-            if (Employee is null) 
+            if (Employee is null)
                 throw new ArgumentNullException(nameof(Employee));
 
             /*

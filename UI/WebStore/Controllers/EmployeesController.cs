@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebStore.Data;
 using WebStore.Domain.Entities.Employees;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.ViewMoodel;
-using WebStore.Infrastructure.Interfaces;
-using WebStore.Infrastructure.Mapping;
+using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 
 namespace WebStore.Controllers
 {
