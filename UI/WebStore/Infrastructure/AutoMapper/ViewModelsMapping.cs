@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Employees;
-using WebStore.ViewMoodel;
+using WebStore.Domain.ViewMoodel;
 
 namespace WebStore.Infrastructure.AutoMapper
 {

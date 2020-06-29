@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Cli.Utils.CommandParsing;
 using System.Threading.Tasks;
 using WebStore.Domain.Entities.Identity;
-using WebStore.ViewMoodel.Identity;
+using WebStore.Domain.ViewMoodel.Identity;
 
 namespace WebStore.Controllers
 {

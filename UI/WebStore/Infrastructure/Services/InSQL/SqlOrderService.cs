@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.Entities.Orders;
+using WebStore.Domain.ViewMoodel;
 using WebStore.Infrastructure.Interfaces;
-using WebStore.ViewMoodel;
 
 namespace WebStore.Infrastructure.Services.InSQL
 {

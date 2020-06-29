@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebStore.ViewMoodel
+namespace WebStore.Domain.ViewMoodel
 {
     public class OrderViewModel
     {

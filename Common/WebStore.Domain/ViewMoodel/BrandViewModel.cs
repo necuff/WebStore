@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Domain.Entities.Base.Interfaces;
 
-namespace WebStore.ViewMoodel
+namespace WebStore.Domain.ViewMoodel
 {
     public class BrandViewModel : INamedEntity, IOrderedEntity
     {

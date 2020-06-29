@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebStore.ViewMoodel.Identity
+namespace WebStore.Domain.ViewMoodel.Identity
 {
     public class LoginViewModel
     {

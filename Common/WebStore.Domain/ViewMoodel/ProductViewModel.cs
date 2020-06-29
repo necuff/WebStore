@@ -3,13 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Domain.Entities.Base.Interfaces;
 
-namespace WebStore.ViewMoodel
+namespace WebStore.Domain.ViewMoodel
 {
     public class ProductViewModel : INamedEntity, IOrderedEntity
     {
-        
+
         public int Id { get; set; }
-        
+
         public string Name { get; set; }
 
         public int Order { get; set; }

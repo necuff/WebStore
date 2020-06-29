@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
 using WebStore.Domain.Entities.Employees;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Domain.ViewMoodel;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Mapping;
-using WebStore.ViewMoodel;
 
 namespace WebStore.Controllers
 {
